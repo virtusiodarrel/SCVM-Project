@@ -16,56 +16,52 @@
 
 <body>
     <header class="site-header">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-steel fixed-top py-3">
-    <div id="content", name="content", class="main">
-    <div class="row justify-content-center">
-        <div class="col-8">
-      <a class="navbar-brand mr-4" href="/">BDSA Query Service</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-<!--      <div class="collapse navbar-collapse" id="navbarToggle">-->
-<!--        <div class="navbar-nav">-->
-<!--          <a class="nav-item nav-link" href="#">Add to Database</a>-->
-<!--        </div>-->
-<!--      </div>-->
-        </div>
-    </div>
-    </div>
-    </nav>
-    </header>
-
-    <form class="form-inline">
-        <div id="content" name="content" class="form-group">
-            <div class="col-auto">
-            <h4>Enter CVE ID</h4>
-                <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="CVE-####-####">
-                <button type="submit" class="btn btn-danger mb-2">Search</button>
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top py-3">
+            <a class="navbar-brand mr-4" href="/">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Trend-Micro-Logo.png/1200px-Trend-Micro-Logo.png" alt="Logo" width="110" height="40" class="d-inline-block align-text-top">
+            </a>
+            <h1>BDSA Query Service</h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-nav mr-auto">
             </div>
-        </div>
-    </form>
 
+            <div class="navbar-nav">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="text" placeholder="Enter CVE ID" aria-label="Search">
+                    <button class="btn btn-default" type="submit">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3249/3249897.png" width="35" />
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </header>
 
 
     <main role="main" class="container-fluid">
-        <h2>CVE-2022-39842</h2>
-      <div class="content-section">
-        <p class='text-muted'>
+<!--        <div class="low-opacity">-->
+        <h4>
+            <br>
+            <img src="https://cdn-icons-png.flaticon.com/512/78/78946.png" width="35" height="30"/>
+            CVE-2022-39842
+            </br>
+        </h4>
+
           <ul class="list-group" style = "list-style-type:none">
             <li>Title: </li>
             <li>Description: </li>
             <li>Technical Description: </li>
           </ul>
+          <br>
           <ul class="list-group">
             <li class="list-group-item list-group-item-light">Solution:</li>
             <li class="list-group-item list-group-item-light">Patch:</li>
             <li class="list-group-item list-group-item-light">Mitigation:</li>
             <li class="list-group-item list-group-item-light">Vulnerable Function:</li>
           </ul>
-        </p>
-      </div>
-    </div>
-  </div>
+          </br>
+<!--        </div>-->
 </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
