@@ -1,6 +1,6 @@
 <div align='center'>
 
-# SCVM Project
+# Trend Micro SCVM Project
 ### Members
 Eugene Labuac <br>
 Darrel Virtusio <br><br>
