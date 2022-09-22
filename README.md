@@ -6,8 +6,8 @@ Eugene Labuac <br>
 Darrel Virtusio <br><br>
 
 ## On-The Job Training
+  
 ### CPE199R - B1 
-
 ### Instructor
 Engr. Analyn N. Yumang
 <br><br>
