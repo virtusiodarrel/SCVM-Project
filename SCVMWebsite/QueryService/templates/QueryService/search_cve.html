@@ -12,36 +12,32 @@
 <body>
 {% block content %}
 <br/>
-<center>
     <main role="main" class="container-fluid">
         {% if searched %}
+        {% for cve in cves %}
+        <center>
         <h4>
-
-            <img src="https://cdn-icons-png.flaticon.com/512/78/78946.png" width="35" height="30"/> {{ searched }}
+            <img src="https://cdn-icons-png.flaticon.com/512/78/78946.png" width="35" height="30"/> {{ cve }}
         </h4>
-</center>
-    {% for cve in cves %}
-    <br/>
-
-    <div class="container">
+        </center>
+<br/>
+        <div class="container">
             <ul class="list-group" style = "list-style-type:none">
                 <li>Title: {{ cve.title }}</li>
                 <li>Description: {{ cve.description }}</li>
                 <li>Technical Description: {{ cve.technical_description }}</li>
             </ul>
-            <br>
+            <br/>
             <ul class="list-group">
                 <li class="list-group-item list-group-item-light">Solution: {{ cve.solution }}</li>
                 <li class="list-group-item list-group-item-light">Patch: {{ cve.patch_links }}</li>
                 <li class="list-group-item list-group-item-light">Mitigation: {{ cve.mitigation }}</li>
                 <li class="list-group-item list-group-item-light">Vulnerable Function: {{ cve.vul_function }}</li>
             </ul>
-        {% endfor %}
+            {% endfor %}
                 {% else %}
                     <h1>ERROR</h1>
-        </br>
                 {% endif %}
-
     </div>
 </main>
 

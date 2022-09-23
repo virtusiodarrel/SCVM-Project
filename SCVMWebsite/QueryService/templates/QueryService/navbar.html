@@ -17,6 +17,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add-cve' %}">Add CVEs</a>
         </li>
+               <li class="nav-item">
+          <a class="nav-link" href="{% url 'upload_json' %}">Upload JSON Files</a>
+        </li>
           </ul>
       <form class="d-flex" method=POST action="{% url 'search-cve' %}">
           {% csrf_token %}
