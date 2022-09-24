@@ -14,3 +14,4 @@ class BDSA(models.Model):
 
 	def __str__(self):
 		return self.cve_id
+

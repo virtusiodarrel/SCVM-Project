@@ -16,28 +16,27 @@
     <main role="main" class="container-fixed">
         {% if searched %}
         {% for cve in cves %}
+        <div class="card">
+    <div class="card-header">
         <center>
-        <h4>
+        <h4 class="card-title">
             <img src="https://cdn-icons-png.flaticon.com/512/78/78946.png" width="35" height="30"/> {{ cve }}
         </h4>
         </center>
-        <br/>
-        <div class="container-fixed">
-            <dl class="row">
-                <dt class="col-sm-3">Title: </dt>
-                <dd class="col-sm-9"> {{ cve.title }} <br/></dd>
-                <dt class="col-sm-3">Description: </dt>
-                <dd class="col-sm-9"> {{ cve.description }} <br/></dd>
-                <dt class="col-sm-3">Technical Description: </dt>
-                <dd class="col-sm-9"> {{ cve.technical_description }} <br/></dd>
-            </dl>
-
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Solution: {{ cve.solution }}</li>
-                <li class="list-group-item list-group-item-light">Patch: {{ cve.patch_links }}</li>
-                <li class="list-group-item list-group-item-light">Mitigation: {{ cve.mitigation }}</li>
-                <li class="list-group-item list-group-item-light">Vulnerable Function: {{ cve.vul_function }}</li>
-            </ul>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            BDSA ID: <p class="text-muted">{{ cve.bdsa_id }}</p><br/>
+            Title: <p class="text-muted">{{ cve.title }}</p><br/>
+            Description: <p class="text-muted">{{ cve.description }}</p><br/>
+            Technical Description: <p class="text-muted">{{ cve.technical_description }}</p><br/>
+            Solution: <p class="text-muted">{{ cve.solution }}</p><br/>
+            Patch: <p class="text-muted">{{ cve.patch_links }}</p><br/>
+            Migitation: <p class="text-muted">{{ cve.mitigation }}</p><br/>
+            Vulnerable Function: <p class="text-muted">{{ cve.vul_function }}</p><br/>
+        </p>
+    </div>
+</div>
             <br/>
             {% endfor %}
                 {% else %}
