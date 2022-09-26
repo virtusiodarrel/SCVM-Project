@@ -15,7 +15,13 @@
 {% block content %}
 <br/>
 <center>
-        <h1>SHOW JSON</h1><br/>
+        <h1>{{msg}}: <p class="text-muted">{{dupes}}</p></h1>
+        <tr>
+          {% for dupe in duplicate %} <!-- change cves to cve-list to display all CVEs -->
+          <p class="text-muted">{{dupe}}</p>
+        </tr>
+        {% endfor %}
+
 </center>
 {% endblock %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

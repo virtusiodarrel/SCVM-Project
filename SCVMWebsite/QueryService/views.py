@@ -53,27 +53,32 @@ def upload_json(request):
         form = UploadFileForm(request.POST, request.FILES)
         file = request.FILES.getlist('file')
         duplicate = []
+        added = []
         for i in file:
-            read_json(i, duplicate)
-        
+            show_json(i, duplicate, added)
+        dupes = ', '.join(duplicate)
         if len(duplicate)>0:
-            return HttpResponse("Duplicates for "+ ', '.join(duplicate))
-        if len(file)>1:
-            return HttpResponse("Files added to database")
+            return render(request, 'QueryService/show_json.html', {'msg': "File duplicates", 'duplicate': duplicate})
+        elif len(file)>1:
+            return render(request, 'QueryService/show_json.html', {'msg': "Files added to the database", 'duplicates': added})
         else: 
-            return HttpResponse("File added to database")
+            return render(request, 'QueryService/show_json.html', {'msg': "File added to the database", 'duplicate': added})
     else:
         form = UploadFileForm
     return render(request, 'QueryService/upload_json.html', {'form': form})
 
-def show_json(file, duplicate):
+def show_json(file, duplicate, added):
     cve_id = file.name.split('_')[0]
     details = file.read()
     bdsa_id = json.loads(details)['name']
+    title = json.loads(details)['title']
+    desc = json.loads(details)['description']
+    tech_desc = json.loads(details)['technicalDescription']
+    solution = json.loads(details)['solution']
     if (BDSA.objects.filter(cve_id=cve_id).exists() or BDSA.objects.filter(bdsa_id=bdsa_id).exists()):
         duplicate.append(cve_id)
-        return render(request, 'QueryService/show_json.html', {})
     else:
-        BDSA.objects.create(cve_id=cve_id, bdsa_id=bdsa_id)
-        return render(request, 'QueryService/show_json.html', {})
+        BDSA.objects.create(cve_id=cve_id, bdsa_id=bdsa_id, title=title, description=desc, technical_description=tech_desc, solution=solution)
+        added.append(cve_id)
+    return
 
