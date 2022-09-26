@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
+from django.contrib import messages
 from .forms import BDSAForm
 from .forms import UploadFileForm
 from .models import BDSA
@@ -17,6 +18,7 @@ def add_cve(request):
         form = BDSAForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Successfully Added to Database!')
             return HttpResponseRedirect('/add_cve?submitted=True')
     else:
         form = BDSAForm
@@ -64,14 +66,14 @@ def upload_json(request):
         form = UploadFileForm
     return render(request, 'QueryService/upload_json.html', {'form': form})
 
-def read_json(file, duplicate):
+def show_json(file, duplicate):
     cve_id = file.name.split('_')[0]
     details = file.read()
     bdsa_id = json.loads(details)['name']
     if (BDSA.objects.filter(cve_id=cve_id).exists() or BDSA.objects.filter(bdsa_id=bdsa_id).exists()):
         duplicate.append(cve_id)
-        return
+        return render(request, 'QueryService/show_json.html', {})
     else:
         BDSA.objects.create(cve_id=cve_id, bdsa_id=bdsa_id)
-    return 
+        return render(request, 'QueryService/show_json.html', {})
 
