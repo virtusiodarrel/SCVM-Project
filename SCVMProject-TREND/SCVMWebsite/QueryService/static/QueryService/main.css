@@ -3,24 +3,15 @@ body {
   margin-top: 5rem;
 }
 
-.low-opacity-bg-image {
-  background-image: url(https://i.pinimg.com/originals/19/e9/1f/19e91fe2d16d546bfd863a44a5431059.png);
-  background-size: cover;
-  background-position: center;
-  display: grid;
-  place-content: center;
-  min-height: 500;
-  position: relative;
-  isolation: isolate;
-}
-
-.low-opacity-bg-image::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: white;
-  opacity: 0.9;
+.latestVulns {
+  height: 320px;
+  padding: 0px;
+  overflow: auto;
+  margin: 0px;
+  list-style: none;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #DDD;
 }
 
 h1 {
