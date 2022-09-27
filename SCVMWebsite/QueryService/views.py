@@ -56,7 +56,6 @@ def upload_json(request):
         added = []
         for i in file:
             show_json(i, duplicate, added)
-        dupes = ', '.join(duplicate)
         if len(duplicate)>0:
             return render(request, 'QueryService/show_json.html', {'msg': "File duplicates", 'duplicate': duplicate})
         elif len(file)>1:
