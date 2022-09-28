@@ -19,7 +19,7 @@
     <div class="card-header">
         <center>
         <h4 class="card-title">
-            <img src="https://cdn-icons-png.flaticon.com/512/78/78946.png" width="35" height="30"/> {{ cve }}
+            <img src="https://cdn-icons-png.flaticon.com/512/78/78946.png" width="35" height="30"/> {{ cve.cve_id }}
         </h4>
             <input type="submit" value="Raw" class="btn btn-secondary">
             <input type="submit" value="Beautify" class="btn btn-secondary">
@@ -27,7 +27,7 @@
     </div>
     <div class="card-body">
         <p class="card-text">
-            <h1>JSON OUTPUT HERE</h1>
+            <pre>{{ cve.json_raw }}</pre>
         </p>
     </div>
 </div>

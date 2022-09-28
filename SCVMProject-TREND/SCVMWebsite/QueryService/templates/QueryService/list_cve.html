@@ -20,7 +20,7 @@
     <table class="table table-hover table-striped table-bordered">
         {% for cve in cves %} <!-- change cves to cve-list to display all CVEs -->
         <tr>
-            <td><a href="{% url 'show-cve' cve.id %}">{{ cve }}</a></td>
+            <td><a href="{% url 'show-cve' cve.cve_id %}">{{ cve }}</a></td>
         </tr>
         {% endfor %}
     </table>
