@@ -7,12 +7,13 @@ from .forms import UploadFileForm
 from .models import BDSA
 import json
 from django.core.paginator import Paginator
-from django.forms.models import model_to_dict
+import random
 
 # Create your views here.
 def home(request):
-    last_five = BDSA.objects.all().order_by('?')[:5]
-    return render(request, 'QueryService/home.html', {'cve': last_five})
+    last_five = list(BDSA.objects.all())
+    random_five = random.sample(last_five, 5)
+    return render(request, 'QueryService/home.html', {'cve': random_five})
 
 
 def search_cve(request):
@@ -26,11 +27,21 @@ def search_cve(request):
 def list_cve(request):
     cve_list = BDSA.objects.all() #.order_by('-cve_id')
     # Pagination
-    page = Paginator(cve_list.order_by('-cve_id'), 10) # show 10 per page
-    pages = request.GET.get('page')
-    cves = page.get_page(pages)
-    nums = "a" * cves.paginator.num_pages
-    return render(request, 'QueryService/list_cve.html', {'cve_list': cve_list, 'cves': cves, 'nums':nums})
+    paginator = Paginator(cve_list.order_by('-cve_id'), 10)  # show 10 per page
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+    try:
+        cves = paginator.page(page)
+    except:
+        cves = paginator.page(1)
+    index = cves.number - 1
+    max_index = len(paginator.page_range)
+    start_index = index - 2 if index >= 2 else 0
+    end_index = index + 2 if index <= max_index - 2 else max_index
+    page_range = list(paginator.page_range)[start_index:end_index]
+    return render(request, 'QueryService/list_cve.html', {'cve_list': cve_list, 'cves': cves, 'page_range': page_range})
 
 def show_cve(request, cve_id):
     cve = BDSA.objects.get(cve_id=cve_id)

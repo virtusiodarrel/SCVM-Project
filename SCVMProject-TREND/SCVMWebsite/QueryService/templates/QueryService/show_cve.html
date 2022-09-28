@@ -12,6 +12,8 @@
 </head>
 <body>
 {% block content %}
+    {% load prettyjson %}
+  {% prettyjson_setup %}
 <br/>
 
 <div class="container">
@@ -27,7 +29,7 @@
     </div>
     <div class="card-body">
         <p class="card-text">
-            <pre>{{ cve.json_raw }}</pre>
+            {% prettyjson cve.json_raw %}
         </p>
     </div>
 </div>
