@@ -18,7 +18,7 @@
           <a class="nav-link" href="{% url 'upload_json' %}">Upload JSON Files</a>
         </li>
           </ul>
-      <form class="d-flex" method=POST action="{% url 'search-cve' %}">
+      <form class="d-flex" action="{% url 'search-cve' %}">
           {% csrf_token %}
         <input class="form-control me-2" type="search" placeholder="Enter CVE ID" aria-label="Search" name="searched">
         <button class="btn btn-default" type="submit" style="background-color:transparent" >

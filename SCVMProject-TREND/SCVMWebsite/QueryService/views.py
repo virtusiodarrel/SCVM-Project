@@ -18,12 +18,27 @@ def home(request):
 
 
 def search_cve(request):
-    if request.method == "POST":
-        searched = request.POST['searched']
-        cves = BDSA.objects.filter(cve_id__contains=searched)
-        return render(request, 'QueryService/search_cve.html', {'searched':searched, 'cves':cves})
-    else:
-        return render(request, 'QueryService/search_cve.html', {})
+    if request.method == 'GET':
+        searched = request.GET.get('searched')
+        if searched:
+            cve_search = BDSA.objects.filter(cve_id__icontains=searched)
+            paginator = Paginator(cve_search.order_by('-cve_id'), 10)  # show 10 per page
+            try:
+                page = int(request.GET.get('page', '1'))
+            except:
+                page = 1
+            try:
+                cves = paginator.page(page)
+            except:
+                cves = paginator.page(1)
+            index = cves.number - 1
+            max_index = len(paginator.page_range)
+            start_index = index - 2 if index >= 2 else 0
+            end_index = index + 2 if index <= max_index - 2 else max_index
+            page_range = list(paginator.page_range)[start_index:end_index]
+            return render(request, 'QueryService/search_cve.html', {'searched':searched, 'cve_search':cve_search, 'cves': cves, 'page_range': page_range})
+        else:
+            return render(request, 'QueryService/search_cve.html', {})
 
 def list_cve(request):
     cve_list = BDSA.objects.all()
@@ -66,7 +81,7 @@ def upload_json(request):
         form = UploadFileForm
     return render(request, 'QueryService/upload_json.html', {'form': form})
 
-def show_json(file, duplicate, added):
+def read_json(file, duplicate, added):
     cve_id = file.name.split('_')[0]
     details = file.read()
     bdsa_id = json.loads(details)['name']
