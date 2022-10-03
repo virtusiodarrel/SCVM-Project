@@ -22,7 +22,10 @@ def search_cve(request):
         searched = request.GET.get('searched')
         if searched:
             cve_search = BDSA.objects.filter(cve_id__icontains=searched)
-            paginator = Paginator(cve_search.order_by('-cve_id'), 10)  # show 10 per page
+            if len(cve_search)==1:
+                cve = BDSA.objects.get(cve_id=searched)
+                return render(request, 'QueryService/show_cve.html', {'cve': cve})
+            paginator = Paginator(cve_search.order_by('-cve_id'), 13)  # show 10 per page
             try:
                 page = int(request.GET.get('page', '1'))
             except:
