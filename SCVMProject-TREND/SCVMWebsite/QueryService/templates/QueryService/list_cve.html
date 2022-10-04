@@ -18,9 +18,18 @@
         <br/>
     <div class="container">
     <table class="table table-hover table-striped table-bordered">
+        <tr>
+            <td>
+                <h4><strong><center>CVE ID</center></strong></h4>
+            </td>
+            <td>
+                <h4><strong><center>Date Added</center></strong></h4>
+            </td>
+        </tr>
         {% for cve in cves %} <!-- change cves to cve-list to display all CVEs -->
         <tr>
-            <td><a href="{% url 'show-cve' cve.cve_id %}">{{ cve }}</a></td>
+            <td><center><a href="{% url 'show-cve' cve.cve_id %}">{{ cve }}</a></center></td>
+            <td><center>{{ cve.added_date }}</center></td>
         </tr>
         {% endfor %}
     </table>

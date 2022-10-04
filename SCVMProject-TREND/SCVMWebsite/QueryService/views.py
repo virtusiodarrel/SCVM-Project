@@ -13,17 +13,20 @@ from django.forms.models import model_to_dict
 # Create your views here.
 def home(request):
     last_five = list(BDSA.objects.all())
-    random_five = random.sample(last_five, 5)
-    return render(request, 'QueryService/home.html', {'cve': random_five})
+    if len(last_five) > 5:
+        random_five = random.sample(last_five, 5)
+        return render(request, 'QueryService/home.html', {'cve': random_five})
+    else:
+        return upload_json(request)
 
 
 def search_cve(request):
     if request.method == 'GET':
-        searched = request.GET.get('searched')
+        searched = request.GET.get('searched').upper()
         if searched:
             cve_search = BDSA.objects.filter(cve_id__icontains=searched)
             if len(cve_search)==1:
-                cve = BDSA.objects.get(cve_id=searched)
+                cve = cve_search[0]
                 return render(request, 'QueryService/show_cve.html', {'cve': cve})
             paginator = Paginator(cve_search.order_by('-cve_id'), 13)  # show 10 per page
             try:
