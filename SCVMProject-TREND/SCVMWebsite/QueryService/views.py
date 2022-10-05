@@ -75,29 +75,37 @@ def upload_json(request):
         file = request.FILES.getlist('file')
         duplicate = []
         added = []
+        invalid = []
         for i in file:
-            read_json(i, duplicate, added)
+            read_json(i, duplicate, added, invalid)
         if len(duplicate)>0:
             return render(request, 'QueryService/read_json.html', {'msg': "File duplicates", 'duplicate': duplicate})
         elif len(file)>1:
             return render(request, 'QueryService/read_json.html', {'msg': "Files added to the database", 'duplicate': added})
+        elif 'json' not in i:
+             return render(request, 'QueryService/read_json.html', {'msg': "Invalid Files", 'duplicate': invalid})
         else: 
             return render(request, 'QueryService/read_json.html', {'msg': "File added to the database", 'duplicate': added})
     else:
         form = UploadFileForm
     return render(request, 'QueryService/upload_json.html', {'form': form})
 
-def read_json(file, duplicate, added):
-    cve_id = file.name.split('_')[0]
+def read_json(file, duplicate, added, invalid):
     details = file.read()
-    bdsa_id = json.loads(details)['name']
-    title = json.loads(details)['title']
-    content = json.loads(details)
-    content_formatted = json.dumps(content, indent=3)
-    if (BDSA.objects.filter(cve_id=cve_id).exists() or BDSA.objects.filter(bdsa_id=bdsa_id).exists()):
-        duplicate.append(cve_id)
+    if '.json' in file.name:
+        content = json.loads(details)
+        if 'source' in content and content['source'] == 'BDSA':
+            cve_id = file.name.split('_')[0]
+            bdsa_id = json.loads(details)['name']
+            title = json.loads(details)['title']
+            content_formatted = json.dumps(content, indent=3)
+            if (BDSA.objects.filter(cve_id=cve_id).exists() or BDSA.objects.filter(bdsa_id=bdsa_id).exists()):
+                duplicate.append(cve_id)
+            else:
+                BDSA.objects.create(cve_id=cve_id, bdsa_id=bdsa_id, title=title, json_raw=content_formatted)
+                added.append(cve_id)
+        else:
+            invalid.append(file.name)
     else:
-        BDSA.objects.create(cve_id=cve_id, bdsa_id=bdsa_id, title=title, json_raw=content_formatted)
-        added.append(cve_id)
-    return 
-
+        invalid.append(file.name)
+    return
