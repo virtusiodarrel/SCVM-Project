@@ -76,16 +76,13 @@ def upload_json(request):
         duplicate = []
         added = []
         invalid = []
+        msg1 = "Files added to database"
+        msg2 = "File duplicates"
+        msg3 = "Invalid Files"
         for i in file:
             read_json(i, duplicate, added, invalid)
-        if len(duplicate)>0:
-            return render(request, 'QueryService/read_json.html', {'msg': "File duplicates", 'duplicate': duplicate})
-        elif len(file)>1:
-            return render(request, 'QueryService/read_json.html', {'msg': "Files added to the database", 'duplicate': added})
-        elif 'json' not in i:
-             return render(request, 'QueryService/read_json.html', {'msg': "Invalid Files", 'duplicate': invalid})
-        else: 
-            return render(request, 'QueryService/read_json.html', {'msg': "File added to the database", 'duplicate': added})
+        return render(request, 'QueryService/read_json.html', {'msg1': msg1, "msg2": msg2, "msg3": msg3, "added": added, 'duplicate': duplicate, 'invalid': invalid})
+
     else:
         form = UploadFileForm
     return render(request, 'QueryService/upload_json.html', {'form': form})

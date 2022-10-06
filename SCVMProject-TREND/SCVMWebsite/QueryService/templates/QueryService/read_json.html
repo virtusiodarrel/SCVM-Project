@@ -15,14 +15,32 @@
 {% block content %}
 <br/>
 <center>
-        <h1>{{ msg }}: <p class="text-muted">{{ dupe }}</p></h1>
+        {% if added %}
+        <h1>{{ msg1 }}:</h1>
+        <tr>
+          {% for add in added %}
+          <p class="text-muted">{{add}}</p>
+          {% endfor %}
+        </tr>
+        {% endif %}
+        {% if duplicate %}
+        <h1>{{ msg2 }}:</h1>
         <tr>
           {% for dupe in duplicate %}
           <p class="text-muted">{{dupe}}</p>
         </tr>
         {% endfor %}
-
+        {% endif %}
+        {% if invalid %}
+        <h1>{{ msg3 }}:</h1>
+        <tr>
+          {% for inv in invalid %}
+          <p class="text-muted">{{inv}}</p>
+          {% endfor %}
+        </tr>
+        {% endif %}
 </center>
+
 {% endblock %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
