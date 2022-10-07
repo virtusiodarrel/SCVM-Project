@@ -89,7 +89,8 @@ def upload_json(request):
 
 def read_json(file, duplicate, added, invalid):
     details = file.read()
-    if '.json' in file.name:
+    split_file_name = file.name.split('_')
+    if '.json' in file.name and len(split_file_name[0].split('-')) == 3 and len(split_file_name[1].split('-')) == 3:
         content = json.loads(details)
         if 'source' in content and content['source'] == 'BDSA':
             cve_id = file.name.split('_')[0]
