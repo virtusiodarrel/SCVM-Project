@@ -18,13 +18,12 @@ class JsonAdmin(admin.ModelAdmin):
 class BDSAForm(ModelForm):
     class Meta:
         model = BDSA
-        fields = ("cve_id", "bdsa_id", "title", "json_raw")
+        fields = ("cve_id", "bdsa_id", "title")
 
         labels = {
             "cve_id": '',
             "bdsa_id": '',
             "title": '',
-            "json_raw": '',
 
         }
 
@@ -32,7 +31,6 @@ class BDSAForm(ModelForm):
             "cve_id": forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'CVE ID'}),
             "bdsa_id": forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'BDSA ID'}),
             "title": forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'Title'}),
-            "json_raw": forms.TextInput(attrs={'class':'form-control-sm', 'placeholder': 'JSON Raw Contents'}),
 
         }
 

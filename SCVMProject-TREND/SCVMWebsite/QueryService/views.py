@@ -2,13 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.contrib import messages
-import random
 from .forms import BDSAForm
 from .forms import UploadFileForm
 from .models import BDSA
-import json
 from django.core.paginator import Paginator
 from django.forms.models import model_to_dict
+import json
+import random
 
 # Create your views here.
 def home(request):
@@ -27,7 +27,8 @@ def search_cve(request):
             cve_search = BDSA.objects.filter(cve_id__icontains=searched)
             if len(cve_search)==1:
                 cve = cve_search[0]
-                return render(request, 'QueryService/show_cve.html', {'cve': cve})
+                content = json.loads(cve.json_file.read())
+                return render(request, 'QueryService/show_cve.html', {'cve': cve, 'content': content})
             paginator = Paginator(cve_search.order_by('-cve_id'), 13)  # show 10 per page
             try:
                 page = int(request.GET.get('page', '1'))
@@ -67,7 +68,8 @@ def list_cve(request):
 
 def show_cve(request, cve_id):
     cve = BDSA.objects.get(cve_id=cve_id)
-    return render(request, 'QueryService/show_cve.html', {'cve': cve})
+    content = json.loads(cve.json_file.read())
+    return render(request, 'QueryService/show_cve.html', {'cve': cve, 'content': content})
 
 def upload_json(request):
     if request.method == 'POST':
@@ -80,17 +82,25 @@ def upload_json(request):
         msg2 = "File duplicates"
         msg3 = "Invalid Files"
         for i in file:
-            read_json(i, duplicate, added, invalid)
+            read_json(i, duplicate, added, invalid, request)
         return render(request, 'QueryService/read_json.html', {'msg1': msg1, "msg2": msg2, "msg3": msg3, "added": added, 'duplicate': duplicate, 'invalid': invalid})
 
     else:
         form = UploadFileForm
     return render(request, 'QueryService/upload_json.html', {'form': form})
 
-def read_json(file, duplicate, added, invalid):
+def read_json(file, duplicate, added, invalid, request):
+
     details = file.read()
     split_file_name = file.name.split('_')
-    if '.json' in file.name and len(split_file_name[0].split('-')) == 3 and len(split_file_name[1].split('-')) == 3:
+    cve_file_name = ""
+    bdsa_file_name = ""
+    try: 
+        cve_file_name = split_file_name[0].split('-')
+        bdsa_file_name = split_file_name[1].split('-')
+    except:
+        pass
+    if '.json' in file.name and len(cve_file_name) == 3 and cve_file_name[0] == "CVE" and len(bdsa_file_name) == 3 and bdsa_file_name[0] == "BDSA":
         content = json.loads(details)
         if 'source' in content and content['source'] == 'BDSA':
             cve_id = file.name.split('_')[0]
@@ -100,7 +110,8 @@ def read_json(file, duplicate, added, invalid):
             if (BDSA.objects.filter(cve_id=cve_id).exists() or BDSA.objects.filter(bdsa_id=bdsa_id).exists()):
                 duplicate.append(cve_id)
             else:
-                BDSA.objects.create(cve_id=cve_id, bdsa_id=bdsa_id, title=title, json_raw=content_formatted)
+                file = BDSA(cve_id=cve_id, bdsa_id=bdsa_id, title=title, json_file = file)
+                file.save()
                 added.append(cve_id)
         else:
             invalid.append(file.name)

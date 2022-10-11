@@ -1,8 +1,12 @@
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+JSON_ROOT = os.path.join(BASE_DIR, 'file')
+JSON_URL = '/file'
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
+DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 150  # 150M
+FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -70,7 +74,7 @@ DATABASES = {
     }
 }
 
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
