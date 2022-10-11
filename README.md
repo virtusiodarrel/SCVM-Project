@@ -25,8 +25,10 @@ pip install django django-prettyjson
 
 ## Running the website
 
-At the command line, navigate to the directory of the website in your local machine:
+At the command line, navigate to the directory of the app in your local machine, synchronize the database, and runserver:
 ```
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver
 ```
 
