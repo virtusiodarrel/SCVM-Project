@@ -68,7 +68,7 @@ def list_cve(request):
 
 def show_cve(request, cve_id):
     cve = BDSA.objects.get(cve_id=cve_id)
-    content = json.loads(cve.json_file.read())
+    content = json.dumps(json.loads(cve.json_file.read()))
     return render(request, 'QueryService/show_cve.html', {'cve': cve, 'content': content})
 
 def upload_json(request):
