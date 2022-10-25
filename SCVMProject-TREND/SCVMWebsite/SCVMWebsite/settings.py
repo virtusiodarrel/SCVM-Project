@@ -4,9 +4,18 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 JSON_ROOT = os.path.join(BASE_DIR, 'file')
 JSON_URL = '/file'
+
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 150  # 150M
 FILE_UPLOAD_MAX_MEMORY_SIZE = DATA_UPLOAD_MAX_MEMORY_SIZE
+
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'Asia/Manila'
+USE_I18N = True
+USE_TZ = True
+
+# DEBUG = False
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -97,13 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

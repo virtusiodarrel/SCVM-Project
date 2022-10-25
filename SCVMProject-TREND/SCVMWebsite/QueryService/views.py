@@ -90,7 +90,6 @@ def upload_json(request):
     return render(request, 'QueryService/upload_json.html', {'form': form})
 
 def read_json(file, duplicate, added, invalid, request):
-
     details = file.read()
     split_file_name = file.name.split('_')
     cve_file_name = ""
@@ -102,19 +101,23 @@ def read_json(file, duplicate, added, invalid, request):
         pass
     if '.json' in file.name and len(cve_file_name) == 3 and cve_file_name[0] == "CVE" and len(bdsa_file_name) == 3 and bdsa_file_name[0] == "BDSA":
         content = json.loads(details)
-        if 'source' in content and content['source'] == 'BDSA':
-            cve_id = file.name.split('_')[0]
-            bdsa_id = json.loads(details)['name']
-            title = json.loads(details)['title']
-            content_formatted = json.dumps(content, indent=3)
-            if (BDSA.objects.filter(cve_id=cve_id).exists() or BDSA.objects.filter(bdsa_id=bdsa_id).exists()):
-                duplicate.append(cve_id)
-            else:
-                file = BDSA(cve_id=cve_id, bdsa_id=bdsa_id, title=title, json_file = file)
-                file.save()
-                added.append(cve_id)
-        else:
+        try:
+            if 'source' in content and content['source'] == 'BDSA':
+                cve_id = file.name.split('_')[0]
+                bdsa_id = json.loads(details)['name']
+                title = json.loads(details)['title']
+                content_formatted = json.dumps(content, indent=3)
+                if (BDSA.objects.filter(cve_id=cve_id).exists() or BDSA.objects.filter(bdsa_id=bdsa_id).exists()):
+                    duplicate.append(cve_id)
+                else:
+                    file = BDSA(cve_id=cve_id, bdsa_id=bdsa_id, title=title, json_file = file)
+                    file.save()
+                    added.append(cve_id)
+        except:
             invalid.append(file.name)
     else:
         invalid.append(file.name)
     return
+
+
+
