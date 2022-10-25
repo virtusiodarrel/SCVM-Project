@@ -20,6 +20,21 @@ At the command line:
 pip3 install -r requirements.txt
 ```
 
+## Changes to prettyjson.css
+
+Navigate to the directory below and open prettyjson.css
+```
+C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\Lib\site-packages\prettyjson\static\prettyjson
+```
+
+Add this extra lines of code in prettyjson.css. This will adjust the display of raw json output
+```
+textarea {
+  height: 29.6em;
+  width: 79em;
+}
+```
+
 ## Running the website
 
 At the command line, navigate to the directory of the application in your local machine.
