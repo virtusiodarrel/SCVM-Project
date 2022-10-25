@@ -19,7 +19,7 @@ pip3 install -r requirements.txt
 
 ## Changes to prettyjson.css
 
-Navigate to the directory below and open prettyjson.css
+Navigate to the prettyjson directory and open prettyjson.css
 ```
 C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\Lib\site-packages\prettyjson\static\prettyjson
 ```
