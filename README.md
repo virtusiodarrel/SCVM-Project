@@ -22,12 +22,41 @@ pip3 install -r requirements.txt
 
 ## Running the website
 
-At the command line, navigate to the directory of the app in your local machine, synchronize the database, and runserver:
+At the command line, navigate to the directory of the application in your local machine.
+```
+C:\Users\ADMIN>cd Desktop\SCVMProject-TREND\SCVMWebsite
+
+C:\Users\ADMIN\Desktop\SCVMProject-TREND\SCVMWebsite
+```
+
+Synchronizing the database
+
+Synchronizing the database is Django's way to propagate changes made to the models into your database schema.
 ```
 python manage.py makemigrations
 python manage.py migrate
-python manage.py runserver
 ```
+
+Creating the superuser
+
+Creating a superuser will allow access to the Admin page (127.0.0.1:8000/admin or localhost:8000/admin)
+```
+python manage.py createsuperuser
+```
+Enter the username of your choice:
+```
+Username: SampleUsername
+```
+Enter the email address (It can be left blank):
+```
+Email address: example@gmail.com
+```
+Enter the password:
+```
+Password: ********
+Password(again): ********
+```
+
 
 Run the localhost in your browser
 ```
