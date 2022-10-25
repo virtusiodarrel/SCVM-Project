@@ -29,7 +29,7 @@ C:\Users\ADMIN>cd Desktop\SCVMProject-TREND\SCVMWebsite
 C:\Users\ADMIN\Desktop\SCVMProject-TREND\SCVMWebsite
 ```
 
-Synchronizing the database
+#### Synchronizing the database
 
 Synchronizing the database is Django's way to propagate changes made to the models into your database schema.
 ```
@@ -37,7 +37,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-Creating the superuser
+#### Creating the superuser
 
 Creating a superuser will allow access to the Admin page (127.0.0.1:8000/admin or localhost:8000/admin)
 ```
@@ -57,8 +57,11 @@ Password: ********
 Password(again): ********
 ```
 
-
-Run the localhost in your browser
+#### Starting the development server
+```
+python manage.py runserver
+```
+Enter the localhost in your browser
 ```
 127:0:0:1/8000 or localhost:8000
 ```
