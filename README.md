@@ -12,19 +12,29 @@ Darrel Virtusio <br><br>
 
 ## Installation
 
-At the command line:
+At the command line, create a virtual environment.
+```
+pipenv shell
+```
+
+Install the requirements.
 ```
 pip3 install -r requirements.txt
 ```
 
 ## Changes to prettyjson.css
 
-Navigate to the prettyjson directory and open prettyjson.css
+Navigate to the prettyjson directory, open widgets.py, and change DEFAULT_ATTR.
+```
+DEFAULT_ATTR = 'parsed'
+```
+
+Navigate to the prettyjson directory and open prettyjson.css.
 ```
 C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\Lib\site-packages\prettyjson\static\prettyjson
 ```
 
-Add these extra lines of code in prettyjson.css. This will adjust the display of raw json output
+Add these extra lines of code in prettyjson.css. This will adjust the display of raw output.
 ```
 textarea {
   height: 29.6em;
@@ -32,13 +42,16 @@ textarea {
 }
 ```
 
+Change the font size parameter from 1.1em to 0.9em in line 1 of prettyjson.css.
+```
+.jsonview{font-family:monospace; font-size:0.9em;white-space:pre-wrap}
+```
+
 ## Running the website
 
-At the command line, navigate to the directory of the application in your local machine.
+At the command line, navigate to the directory which contains `manage.py` file.
 ```
-C:\Users\ADMIN>cd Desktop\SCVMProject-TREND\SCVMWebsite
-
-C:\Users\ADMIN\Desktop\SCVMProject-TREND\SCVMWebsite
+(venv)C:\Users\ADMIN\Desktop\SCVMProject-TREND\SCVMWebsite
 ```
 
 ### Synchronizing the database
