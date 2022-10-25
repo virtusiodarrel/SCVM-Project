@@ -24,7 +24,7 @@ Navigate to the prettyjson directory and open prettyjson.css
 C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\Lib\site-packages\prettyjson\static\prettyjson
 ```
 
-Add this extra lines of code in prettyjson.css. This will adjust the display of raw json output
+Add these extra lines of code in prettyjson.css. This will adjust the display of raw json output
 ```
 textarea {
   height: 29.6em;
@@ -51,7 +51,7 @@ python manage.py migrate
 
 ### Creating the superuser
 
-Creating a superuser will allow access to the Admin page (127.0.0.1:8000/admin or localhost:8000/admin)
+Creating a superuser will allow access to the admin page (127.0.0.1:8000/admin or localhost:8000/admin)
 ```
 python manage.py createsuperuser
 ```
