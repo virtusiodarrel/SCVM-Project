@@ -31,7 +31,7 @@ DEFAULT_ATTR = 'parsed'
 
 Navigate to the prettyjson directory and open prettyjson.css.
 ```
-C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\Lib\site-packages\prettyjson\static\prettyjson
+\Lib\site-packages\prettyjson\static\prettyjson
 ```
 
 Add these extra lines of code in prettyjson.css. This will adjust the display of raw output.
