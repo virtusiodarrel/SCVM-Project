@@ -17,7 +17,7 @@ Darrel Virtusio <br><br>
 
 At the command line:
 ```
-pip install django django-prettyjson
+pip3 install -r requirements.txt
 ```
 
 ## Running the website
